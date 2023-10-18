@@ -32,5 +32,6 @@ urlpatterns = [
     path('status',views.status, name='status'),
     path('status/prosmotr/<int:id1>/<int:id2>/<int:id3>', views.prosmotr, name='prosmotr'),
     path('status/buy/<int:type>/', views.buy, name='buystatus'),
+    path('status/refuse/', views.refuse, name='refusestatus'),
     path('user/registr',views.registr, name='registr'),
 ]

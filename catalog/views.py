@@ -54,7 +54,7 @@ def prosmotr(req, id1, id2, id3):
     status = 0
     print(id1, id2, id3)
     mas = ['бесплатная', 'базовая', 'супер'] #kino id2
-    mas2 = ['Free', 'Base', 'Super'] #user id3 status
+    mas2 = ['бесплатная', 'базовая', 'супер'] #user id3 status
     if id3 != 0:
         status = User.objects.get(id=id3) #нашли юзера
         status = status.groups.all() #нашли его подписки
@@ -88,6 +88,19 @@ def buy(req, type):
     k1 = grnew.name
     data = {'podpiska': k1}
     return render(req, 'buy.html', data)
+
+def refuse(req):
+    usid = req.user.id  # находим номер текущего пользователя
+    user123 = User.objects.get(id=usid)  # находим его в табличке user
+    statusnow = user123.groups.all()[0].id  # номер его подписки(группы)
+    grold = Group.objects.get(id=statusnow)  # находим его подписку в таблице group
+    grold.user_set.remove(user123)  # удаляем старую подписку
+    grnew = Group.objects.get(id=1)  # находим новую подписку
+    grnew.user_set.add(user123)  # добавляем новую подписку
+    k1 = grnew.name
+    data = {'podpiska': k1}
+    return render(req, 'refuse.html', data)
+
 
 from .form import SignUpform
 from django.contrib.auth.forms import UserCreationForm
