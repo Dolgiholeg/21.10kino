@@ -94,11 +94,14 @@ def refuse(req):
     user123 = User.objects.get(id=usid)  # находим его в табличке user
     statusnow = user123.groups.all()[0].id  # номер его подписки(группы)
     grold = Group.objects.get(id=statusnow)  # находим его подписку в таблице group
-    grold.user_set.remove(user123)  # удаляем старую подписку
-    grnew = Group.objects.get(id=1)  # находим новую подписку
-    grnew.user_set.add(user123)  # добавляем новую подписку
-    k1 = grnew.name
-    data = {'podpiska': k1}
+    if grold == 1:
+        return render(req, 'index.html')
+    else:
+        grold.user_set.remove(user123)  # удаляем старую подписку
+        grnew = Group.objects.get(id=1)  # находим новую подписку
+        grnew.user_set.add(user123)  # добавляем новую подписку
+        k1 = grnew.name
+        data = {'podpiska': k1}
     return render(req, 'refuse.html', data)
 
 
