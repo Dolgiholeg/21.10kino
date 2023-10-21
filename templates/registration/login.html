@@ -1,33 +1,37 @@
 {% extends 'index.html' %}
+{% load static %}
 {%  block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>LOGIN</title>
-</head>
+
+    <title>КИНО</title>
+    <link rel="stylesheet" href="{% static 'css/maine.css' %}">
+    <link rel="stylesheet" href="{% static 'css/podpiska.css' %}">
+
 <body>
-    <h2>ВХОД</h2>
-    <form action="{%  url 'login' %}" method="post">
-        {% csrf_token %}
-        <table>
-           <tr>
-               <td>{{ form.username.label_tag }}</td>
-               <td>{{ form.username }}</td>
-           </tr>
+
+    <div class="forma">
+
+        <form action="{%  url 'login' %}" method="post">
+            {% csrf_token %}
+            <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
             <tr>
                <td>{{ form.password.label_tag }}</td>
                <td>{{ form.password }}</td>
-           </tr>
-            <tr>
-                <td>
-                    <a href="{%  url 'password_reset' %}">ЗАБЫЛ ПАРОЛЬ</a>
-                </td>
             </tr>
-        </table>
-        <input type="submit" value="ВХОД">
-    </form>
-    <h2>
-        <a href="{% url 'registr' %}"> РЕГИСТРАЦИЯ</a>
-    </h2>
+            </table>
+            <input type="submit" value="ВХОД">
+        </form>
+
+        <a href="{%  url 'password_reset' %}">
+            <button>ЗАБЫЛ ПАРОЛЬ</button>
+        </a>
+        <a href="{% url 'registr' %}">
+            <button>РЕГИСТРАЦИЯ</button>
+        </a>
+
+    </div>
 </body>
-</html>
-{%  endblock %}
+{%  endblock content %}

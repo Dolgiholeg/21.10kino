@@ -3,7 +3,7 @@
 {% block content %}
     <title>Все фильмы</title>
     <link rel="stylesheet" href="{% static 'css/maine.css' %}">
-    <link rel="stylesheet" href="{% static 'css/podpisk.css' %}">
+    <link rel="stylesheet" href="{% static 'css/podpiska.css' %}">
     <h2>ПОДПИСКИ:</h2>
     {% for one in podpiska %}
         <h3 class="main">{{ one.name }}</h3>
@@ -12,14 +12,14 @@
             <div class="card">
                 <img src="{% static kino.image %}" alt="">
                 <h2>{{ kino.title }}</h2>
-                <h4>{{ kino.genre }}</h4>
+                <h3>{{ kino.genre }}</h3>
                     {% if not user.username %}
                     <a href="{% url 'prosmotr' kino.id one.id 0 %}">
                         <button>СМОТРЕТЬ</button>
                     </a>
                     {% else %}
                     <a href="{% url 'prosmotr' kino.id one.id user.id %}">
-                    <button>СМОТРЕТЬ</button>
+                   <button>СМОТРЕТЬ</button>
                     </a>
                 {% endif %}
             </div>
